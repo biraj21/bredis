@@ -41,7 +41,7 @@ int main(void) {
 
   while (true) {
     // accept
-    struct sockaddr_in client_addr;
+    struct sockaddr_in client_addr = {0};
     socklen_t socklen = sizeof(client_addr);
     int connfd = accept(fd, (struct sockaddr *)&client_addr, &socklen);
     if (connfd < 0) {
@@ -56,7 +56,7 @@ int main(void) {
 }
 
 static void do_something(int connfd) {
-  char rbuf[64];
+  char rbuf[64] = {0};
   ssize_t n = read(connfd, rbuf, sizeof(rbuf) - 1);
   if (n < 0) {
     puts("read() error");

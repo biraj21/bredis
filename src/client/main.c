@@ -26,7 +26,7 @@ int main(void) {
   char msg[] = "hello";
   write(fd, msg, strlen(msg));
 
-  char rbuf[64];
+  char rbuf[64] = {0};
   ssize_t n = read(fd, rbuf, sizeof(rbuf) - 1);
   if (n < 0) {
     die("read");
