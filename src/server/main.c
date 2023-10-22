@@ -6,6 +6,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
+#include "../shared/config.h"
 #include "../shared/error_handling.h"
 
 static void do_something(int connfd);
@@ -26,7 +27,7 @@ int main(void) {
   // bind IPv4 addresses to the socket
   struct sockaddr_in addr = {
       .sin_family = AF_INET,
-      .sin_port = ntohs(2111),
+      .sin_port = ntohs(PORT),
       .sin_addr.s_addr = ntohl(0), // wildcard address 0.0.0.0
   };
   if (bind(fd, (const struct sockaddr *)&addr, sizeof(addr))) {

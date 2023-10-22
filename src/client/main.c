@@ -4,6 +4,7 @@
 #include <string.h>
 #include <unistd.h>
 
+#include "../shared/config.h"
 #include "../shared/error_handling.h"
 
 int main(void) {
@@ -15,7 +16,7 @@ int main(void) {
   // bind IPv4 addresses to the socket
   struct sockaddr_in addr = {
       .sin_family = AF_INET,
-      .sin_port = ntohs(2111),
+      .sin_port = ntohs(PORT),
       .sin_addr.s_addr = ntohl(INADDR_LOOPBACK), // 127.0.0.1
   };
   if (connect(fd, (const struct sockaddr *)&addr, sizeof(addr))) {
