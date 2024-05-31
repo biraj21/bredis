@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/socket.h>
+#include <unistd.h>
 
 #include "../shared/config.h"
 #include "../shared/error_handling.h"
@@ -15,7 +16,11 @@
 
 void cleanup(void);
 
-struct addrinfo *server_info;
+// to store the address information of the server
+struct addrinfo *server_info = NULL;
+
+// the socket file descriptor
+int socket_fd = -1;
 
 int main(void) {
   atexit(cleanup);
@@ -38,8 +43,8 @@ int main(void) {
   }
 
   // create a socket
-  int socket_fd = socket(server_info->ai_family, server_info->ai_socktype,
-                         server_info->ai_protocol);
+  socket_fd = socket(server_info->ai_family, server_info->ai_socktype,
+                     server_info->ai_protocol);
   if (socket_fd == -1) {
     perror("socket()");
     return EXIT_FAILURE;
@@ -96,6 +101,11 @@ int main(void) {
 }
 
 void cleanup(void) {
+  // close the socket file descriptor
+  if (socket_fd != -1) {
+    close(socket_fd);
+  }
+
   // free the addrinfo linked list
   if (server_info != NULL) {
     freeaddrinfo(server_info);

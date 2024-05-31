@@ -34,6 +34,6 @@ Makefile
 
 ## Resources
 
-- [Build Your Own Redis with C/C++](https://build-your-own.org/redis/06_event_loop_impl)
+- [Build Your Own Redis with C/C++](https://build-your-own.org/redis/)
 - [Beej's Guide to Network Programming](https://beej.us/guide/bgnet/html/multi/index.html)
 - [Johannes 4GNU_Linux's YouTube video](https://www.youtube.com/watch?v=O-yMs3T0APU)
