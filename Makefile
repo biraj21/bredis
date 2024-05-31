@@ -12,8 +12,8 @@ server_obj = $(obj_dir)/server
 shared_obj = $(obj_dir)/shared
 
 dist_dir = dist
-client_bin = $(dist_dir)/bredis-client
-server_bin = $(dist_dir)/bredis-server
+client_bin = $(dist_dir)/client
+server_bin = $(dist_dir)/server
 
 client_header_files = $(wildcard $(client_src)/*.h)
 server_header_files = $(wildcard $(server_src)/*.h)
@@ -40,7 +40,7 @@ $(client_bin): $(client_obj_files) $(shared_obj_files)
 $(server_bin): $(server_obj_files) $(shared_obj_files)
 	$(CC) $(FLAGS) -o $@ $^
 
-# compile .c file when it or any related header file has changed
+# compile a .c file when it or any related header file has changed
 
 $(client_obj)/%.o: $(client_src)/%.c $(client_header_files) $(shared_header_files)
 	$(CC) $(FLAGS) -c -o $@ $<
@@ -54,10 +54,3 @@ $(shared_obj)/%.o: $(shared_src)/%.c $(shared_src)/%.h
 # debug: $(server_bin)
 # 	valgrind --log-file=valgrind.log $(server_bin)
 
-# run the client binary
-run-client: $(client_bin)
-	./$(client_bin)
-
-# run the server binary
-run-server: $(server_bin)
-	./$(server_bin)
